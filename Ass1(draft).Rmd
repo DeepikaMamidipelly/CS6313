@@ -1,0 +1,31 @@
+#1)one draw of the block lifetimes
+#rate=1/mean
+xA=rexp(n=1,rate=1/10);
+xB=rexp(n=1,rate=1/10);
+
+#Repeat previous step 10000 times using replica
+draws=replicate(10000,max(rexp(n=1,rate=1/10),rexp(n=1,rate=1/10)));
+
+#histogram for previously draws
+
+hist(draws);
+
+#abc <- function(x){ (0.2*exp(-0.1*x))-(0.2*exp(-0.2*x)); }
+
+curve(0.2*exp(-0.1*x)-0.2*exp(-0.2*x), 0 , 50,add=TRUE );
+
+#saved draws to calculate mean
+mean(draws);
+
+#the satellite lasts more than 15 years
+#pexp to calculate the cumulate probabilty less than years
+1-pexp(15, rate=1/mean(draws))
+
+
+#question-2
+replications=10000
+x = runif(replications,min=0,max=1);
+y = runif(replications,min=0,max=1);
+#area of circle with radius x2+y2=1
+circle= sqrt((x-0.5)^2 + (y-0.5)^2) <= 0.5
+piValue=(sum(circle)/replications)*4
